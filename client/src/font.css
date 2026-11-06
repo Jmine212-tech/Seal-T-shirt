@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Amarante&family=DynaPuff:wght@400..700&family=Gravitas+One&family=Redaction+50:ital,wght@0,400;0,700;1,400&display=swap');
+
+.redaction-50-regular {
+  font-family: "Redaction 50", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.redaction-50-bold {
+  font-family: "Redaction 50", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.redaction-50-regular-italic {
+  font-family: "Redaction 50", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.amarante-regular {
+  font-family: "Amarante", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.amarante-50-bold-italic {
+  font-family: "Amarante 50", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.gravitas-one-regular {
+  font-family: "Gravitas One", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.notable-regular {
+  font-family: "Notable", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}

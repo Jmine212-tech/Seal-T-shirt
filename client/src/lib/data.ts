@@ -1,0 +1,38 @@
+export const PRODUCTS  = [
+    {
+        id: "113",
+        title: "SEAL T-SHIRT STREET WEAR",
+        img: 'shirt_black_sealLogo.jpg',
+        category: "STREET WEAR",
+        existSize: ['M', 'XL', 'XXL'],
+        existColor: ['black', 'white'],
+        price: 35,
+    },
+    {
+        id: "123",
+        title: "VINTAGE GRAPHIC T-SHIRT",
+        img: 'shirt.jpg',
+        category: "HEAVYWEIGHT COTTON",
+        existSize: ['S', 'L', 'M', 'XL', 'XXL'],
+        existColor: ['black', 'white'],
+        price: 40,
+    },
+    {
+        id: "213",
+        title: "SEAL T-SHIRT STREET WEAR COPY",
+        img: 'shirt_black_sealLogo.jpg',
+        category: "STREET WEAR COPY",
+        existSize: ['M', 'XL',],
+        existColor: ['black',],
+        price: 22,
+    },
+    {
+        id: "323",
+        title: "VINTAGE GRAPHIC T-SHIRT COPY",
+        img: 'shirt.jpg',
+        category: "HEAVYWEIGHT COTTON COPY",
+        existSize: ['S', 'XL', 'XXL'],
+        existColor: ['black', 'white'],
+        price: 28,
+    },
+]
