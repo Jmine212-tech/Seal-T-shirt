@@ -2,6 +2,8 @@ import React from "react";
 import { X, Trash2, Plus, Minus, ArrowRight, ShoppingBag } from "lucide-react";
 import { useCartService } from "../Services/useCartService";
 import { useNavigate } from "react-router-dom";
+import { useProfileStore } from "../store/useProfileStore";
+import toast from "react-hot-toast";
 
 interface Product {
   id: string;
@@ -21,8 +23,9 @@ interface CartProps {
 function Cart({props}: {props: CartProps}) {
   const {opCart, setOpCart} = props
   const CART = new useCartService();
-  const navigate = useNavigate();
+  const user = useProfileStore(state => state.user)
 
+  const navigate = useNavigate();
   const handleClose = () => setOpCart(false);
 
   const handleDecQuantity = (index: number) => {
@@ -45,6 +48,17 @@ function Cart({props}: {props: CartProps}) {
   const items: Product[] = CART.itemStore || [];
   const itemCount = CART.numberItemInCart || 0;
   const subtotal = CART.subtotal || 0;
+
+  const handleCheckOut = () => {
+    if(!user){
+      handleClose()
+      navigate('/login')
+    }else{
+      toast.success("check out")
+      CART.resetItemInCart()
+      handleClose()
+    }
+  }
 
   return (
     <div
@@ -110,7 +124,7 @@ function Cart({props}: {props: CartProps}) {
                 {/* Product Thumbnail */}
                 <div
                   onClick={() => handleItemDetail(item)}
-                  className="relative h-24 w-20 flex-shrink-0 cursor-pointer overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900"
+                  className="relative h-24 w-20 cursor-pointer overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900"
                 >
                   <img
                     src={item.img}
@@ -207,10 +221,7 @@ function Cart({props}: {props: CartProps}) {
             </div>
 
             <button
-              onClick={() => {
-                handleClose();
-                navigate("/checkout");
-              }}
+              onClick={handleCheckOut}
               className="group flex w-full items-center justify-center gap-2 rounded-xl bg-white py-3.5 text-sm font-bold text-black transition hover:bg-neutral-200 active:scale-[0.99]"
             >
               <span>Proceed to Checkout</span>

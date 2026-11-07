@@ -25,13 +25,12 @@ const COLOR_MAP: Record<string, string> = {
   olive: 'bg-emerald-900',
 }
 
-function Card({ props }: { props: Product }) {
+function Card({ props }: {props: Product}) {
   const CART = new useCartService()
 
   // Only keep state for interactive user selections
   const [selectedSize, setSelectedSize] = useState<string>(props?.existSize?.[0] ?? '')
   const [selectedColor, setSelectedColor] = useState<string>(props?.existColor?.[0] ?? '')
-  const [isFavorite, setIsFavorite] = useState<boolean>(false)
 
   const handleAddCart = () => {
     if (!props?.id || !props?.title || !selectedSize || !selectedColor) {
@@ -51,8 +50,20 @@ function Card({ props }: { props: Product }) {
     })
   }
 
+  const handleSetItemInFavStore = () => {
+    CART.setItemInFavStore({
+      id: props.id,
+      title: props.title,
+      img: props.img,
+      category: props.category,
+      price: props.price,
+      selectedSize,
+      selectedColor,
+    })
+  }
+
   return (
-    <div className="group relative flex w-80 flex-col overflow-hidden rounded-2xl border border-neutral-800 bg-sky-100 text-neutral-100 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700 hover:shadow-2xl">
+    <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-neutral-800 bg-sky-100 text-neutral-100 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700 hover:shadow-2xl">
       {/* Image Preview & Badges */}
       <div className="relative aspect-4/5 w-full overflow-hidden bg-neutral-900">
         <img
@@ -64,13 +75,13 @@ function Card({ props }: { props: Product }) {
         {/* Favorite Button */}
         <button
           type="button"
-          onClick={() => setIsFavorite(!isFavorite)}
+          onClick={handleSetItemInFavStore}
           aria-label="Save to favorites"
           className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-neutral-950/60 text-white backdrop-blur-md transition-all hover:scale-110 active:scale-95"
         >
           <Heart
             className={`h-4 w-4 transition-colors ${
-              isFavorite ? 'fill-rose-500 text-rose-500' : 'text-neutral-200'
+              CART.favStore?.find( (f: Product) => f.id === props.id) ? 'fill-rose-500 text-rose-500' : 'text-neutral-200'
             }`}
           />
         </button>

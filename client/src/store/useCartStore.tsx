@@ -5,7 +5,7 @@ export const useCartStore = create(
   persist(
     (set) => ({
       itemStore: [],
-      favItem: [],
+      favStore: [],
 
       reset: () => {
         useCartStore.persist.clearStorage();
@@ -27,6 +27,18 @@ export const useCartStore = create(
       decItem: (index: number) => set(
         state => ({
           itemStore: state.itemStore.map((m: Product, i: number) => i === index ? {...m, quantity: m.quantity - 1} : m)
+        })
+      ),
+      resetItemStore: () => set({itemStore: []}),
+
+      addItemToFav: (newItem: Product) => set(
+        state => ({
+          favStore: [...state.favStore, newItem]
+        }),
+      ),
+      removeItemFromFav: (id) => set(
+        state => ({
+          favStore: state.favStore.filter((f: Product) => f.id !== id)
         })
       ),
     }),

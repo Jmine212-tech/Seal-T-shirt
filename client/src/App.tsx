@@ -3,6 +3,8 @@ import AdminPage from "./Pages/AdminPage";
 import ProductDetailPage from "./Pages/ProductDetailPage";
 import Layout from "./components/Layout";
 import MainPage from "./Pages/MainPage";
+import LoginPage from "./Pages/loginPage";
+import ProtectRoute from "./components/ProtectRoute";
 
 function App() {
   return (
@@ -10,9 +12,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/productDetail/:id" element={<ProductDetailPage />} />
-            <Route path="/admin" element={<AdminPage />} />
+          {/* public route */}
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/productDetail/:id" element={<ProductDetailPage />} />
+            
+            {/* protect route */}
+            <Route element={<ProtectRoute allowedRole={["admin"]} />}>
+              <Route path="/admin/:id" element={<AdminPage />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
